@@ -144,6 +144,9 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
+# Firebase
+app/google-services.json
+
 ### Java ###
 # Package Files #
 *.jar

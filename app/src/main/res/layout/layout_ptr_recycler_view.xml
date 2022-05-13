@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.example.moviefun.ui.widgets.PullRefreshRecyclerView" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        bind:onRefreshListener="@{ view.onRefreshListener }"
+        bind:refreshing="@{ view.isRefreshing }">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ptr_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:layoutManager="@{ view.layoutManager }"
+            bind:onScrollListener="@{ view.onScrollListener }"
+            bind:recyclerAdapter="@{ view.adapter }" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>
