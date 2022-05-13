@@ -1,16 +1,15 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.25.2'
     }
 }
 
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -74,10 +73,25 @@ android {
     productFlavors.all {}
 
     applicationVariants.all { variant ->
-        if (variant.getName().contains("dev")) {
-        } else if (variant.getName().contains("stg")) {
-        } else if (variant.getName().contains("prd")) {
-        }
+        def BASE_URL = "https://api.themoviedb.org/"
+        def SMALL_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
+        def LARGE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
+        def ORIGIN_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+        def TMBD_API_KEY = "2cdf3a5c7cf412421485f89ace91e373"
+
+//        if (variant.getName().contains("dev")) {
+//            BASE_URL = "https://api.themoviedb.org"
+//        } else if (variant.getName().contains("stg")) {
+//            BASE_URL = "https://api.themoviedb.org"
+//        } else if (variant.getName().contains("prd")) {
+//            BASE_URL = "https://api.themoviedb.org"
+//        }
+
+        variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
+        variant.buildConfigField "String", "BASE_URL", "\"${SMALL_IMAGE_URL}\""
+        variant.buildConfigField "String", "BASE_URL", "\"${LARGE_IMAGE_URL}\""
+        variant.buildConfigField "String", "BASE_URL", "\"${ORIGIN_IMAGE_URL}\""
+        variant.buildConfigField "String", "TMBD_API_KEY", "\"${TMBD_API_KEY}\""
     }
 }
 
@@ -112,11 +126,17 @@ dependencies {
 
     //dagger 2
     implementation "com.google.dagger:dagger:2.28.3"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
     compileOnly 'javax.annotation:jsr250-api:1.0'
     implementation 'javax.inject:javax.inject:1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:30.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
 }
