@@ -1,6 +1,8 @@
 package com.example.moviefun.ui.base.activity
 
 import android.app.Dialog
+import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ViewDataBinding
@@ -15,6 +17,11 @@ abstract class BaseLoadDataActivity<view : ViewDataBinding, viewModel : BaseLoad
         override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
             handleLoadingChanged((sender as ObservableBoolean).get())
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        setContentView(getLayoutId())
     }
 
     abstract fun initViewModel(): viewModel

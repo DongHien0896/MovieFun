@@ -24,6 +24,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
@@ -114,9 +115,9 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.6"
 
     //Using retrofit library for connect api v4.data.source.remote.service
-    implementation "com.squareup.retrofit2:retrofit:2.6.1"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.6.1"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
 
     //Glide library load image
@@ -125,7 +126,7 @@ dependencies {
     }
 
     //dagger 2
-    implementation "com.google.dagger:dagger:2.28.3"
+    implementation "com.google.dagger:dagger:2.38.1"
     compileOnly 'javax.annotation:jsr250-api:1.0'
     implementation 'javax.inject:javax.inject:1'
 
